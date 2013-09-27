@@ -29,6 +29,7 @@ class WC_Form_Handler {
 		add_action( 'init', array( $this, 'order_again' ) );
 
 		add_action( 'init', array( $this, 'update_cart_action' ) );
+		add_action( 'init', array( $this, 'clear_cart_contents' ) );
 		add_action( 'init', array( $this, 'add_to_cart_action' ) );
 
 		add_action( 'wp', array( $this, 'pay_action' ), 20 );
@@ -349,6 +350,15 @@ class WC_Form_Handler {
 				exit;
 			}
 		}
+	}
+
+	/**
+	 * Clear cart contents on click
+	 * @return [none]
+	 */
+	public function clear_cart_contents() {
+		if( isset( $_GET['clear_cart'] ) )
+			$woocommerce->cart->empty_cart();
 	}
 
 	/**
